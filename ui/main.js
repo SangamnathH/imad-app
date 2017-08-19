@@ -50,7 +50,7 @@ submit.onclick = function () {
     };
     
     //Make a request
-    request.open('GET', 'http://sangamnath.imad.hasura-app.io/submit-name?name', true);
+    request.open('GET', 'http://sangamnath.imad.hasura-app.io/submit-name?name='+ name, true);
     request.send(null);
 };
 
