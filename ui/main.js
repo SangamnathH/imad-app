@@ -47,9 +47,8 @@ submit.onclick = function () {
         }
         // Not done yet
     };
-    var nameInput = document.getElementById("name");
+    var nameInput = document.getElementById('name');
     var name = nameInput.value;
-
     //Make a request
     request.open('GET', 'http://sangamnath.imad.hasura-app.io/submit-name?name='+ name, true);
     request.send(null);
