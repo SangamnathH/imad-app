@@ -3,9 +3,12 @@ var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
 
-var config = () {
-    
-    
+var config = {
+    user: 'sangamnath',
+    database: 'sangamnath',
+    host: 'http://db.imad.hasura-app.io',
+    port: '5432',
+    password: process.env.DB_PASSWORD,
 };
 
 var app = express();
@@ -99,9 +102,17 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/test-db', function (req, res){
+var pool = new Pool(config);
+app.get('/test-db', function (req, res) {
     // Make a select request 
     // return a response with the results
+    pool.query('SELECT * from test', function (err, result) {
+        if (err) {
+            res.status(500).send(err.toString());
+        } else {
+            res.send(JSON.stringify(result));
+        }
+    });
 });
 
 var counter =0;
