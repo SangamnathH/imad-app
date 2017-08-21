@@ -14,54 +14,6 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 
-var articles = {
-    'article-one': {
-        title: 'Article one | sangamnath Hulsoor',
-        heading: 'Article One',
-        date: 'Aug 16, 2017',
-        content:  ` 
-                <p>
-                    This is content for my first article. 
-                </p>
-                <p>
-                    This is content for my first article. 
-                </p>
-                <p>
-                    This is content for my first article. 
-                </p>`
-    },
-    'article-two': {
-        title: 'Article one | sangamnath Hulsoor',
-        heading: 'Article One',
-        date: 'Aug 20, 2017',
-        content:  ` 
-                <p>
-                    This is content for my first article. 
-                </p>
-                <p>
-                    This is content for my first article. 
-                </p>
-                <p>
-                    This is content for my first article. 
-                </p>`
-    },
-    'article-three': {
-        title: 'Article one | sangamnath Hulsoor',
-    heading: 'Article One',
-    date: 'Aug 25, 2017',
-    content:  ` 
-            <p>
-                This is content for my first article. 
-            </p>
-            <p>
-                This is content for my first article. 
-            </p>
-            <p>
-                This is content for my first article. 
-            </p>`
-    },
-};
-
 function createTemplate (data) {
     var title = data.title;
     var date = data.date;
@@ -136,7 +88,7 @@ app.get('/submit-name', function(req, res) {
 app.get('/articles/:articleName', function (req, res) {
   
   //SELECT * FROM article WHERE title= 'article-one'
-  pool.query("SELECT * FROM article WHERE title = '" + req.params.articleName + "'", function (err, result) {
+  pool.query("SELECT * FROM article WHERE title = $1", [req.params.articleName], function (err, result) {
       if (err) {
         res.status(500).send(err.toString());
       } else {
