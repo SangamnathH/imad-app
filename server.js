@@ -105,8 +105,10 @@ app.post('/login', function(req, res) {
                 // Match the password
                 var dbString = results.rows[0].password;
                 var salt = dbString.split('$')[2];
-                var hashedPassword = hash(password, hash);
-                res.send("User successfully created: " + username);
+                var hashedPassword = hash(password, salt); //Creating a hash based on the password submitted and the original salt
+                if (hashedPassword === dbString) {
+                    res.send("Credentials correct!");
+                }
             }
         }
     });
