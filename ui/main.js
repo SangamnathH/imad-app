@@ -13,8 +13,6 @@ submit.onclick = function () {
                 console.login('user logged in');
                 alert('logged in successfully');
             }
-            var ul = document.getElementById('namelist');
-            ul.innerHTML = list;
         }
         // Not done yet
     };
