@@ -118,7 +118,7 @@ app.post('/login', function(req, res) {
                     req.session.auth = {userId: result.rows[0].id};
                     // set the cookie with a seesion id
                     // internally on the server side, it maps the session id with an object
-                    //
+                    // {auth: {userId}}
                     
                     res.send("Credentials correct!");
                 } else {
@@ -127,6 +127,16 @@ app.post('/login', function(req, res) {
                 }
             }
     });
+});
+
+app.get('/check-login', function (req, res){
+    if (req.session && req.session.auth && req.session.auth.userId) {
+        res.send("You are logged in: " + req.session.auth.userid.tostring());
+    } else {
+        res.send(" Your are not logged in.");
+    }
+    
+    
 });
 
 var pool = new Pool(config);
