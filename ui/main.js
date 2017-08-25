@@ -12,6 +12,10 @@ submit.onclick = function () {
             if(request.status === 200) {
                 console.login('user logged in');
                 alert('logged in successfully');
+            } else if(request.status === 403) {
+                alert('username/password is incorrect');
+            } else if(request.status === 500) {
+                alert(' something gone wrong on the network');
             }
         }
         // Not done yet
@@ -21,9 +25,9 @@ submit.onclick = function () {
     console.log(username);
     console.log(password);
     //Make a request
-    request.open('POST', 'http://sangamnath.imad.hasura-app.io/login' + name, true);
+    request.open('POST', 'http://sangamnath.imad.hasura-app.io/login', true);
+    request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify({username: username, password: password}));
-    
 };
 
 
