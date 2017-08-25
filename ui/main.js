@@ -1,4 +1,4 @@
-//Submit user name
+//Submit username/password to login
 var submit = document.getElementById('submit_btn');
 submit.onclick = function () {
     
@@ -27,7 +27,7 @@ submit.onclick = function () {
     var nameInput = document.getElementById('name');
     var name = nameInput.value;
     //Make a request
-    request.open('GET', 'http://sangamnath.imad.hasura-app.io/submit-name?name=' + name, true);
+    request.open('POST', 'http://sangamnath.imad.hasura-app.io/submit-name?name=' + name, true);
     request.send(null);
 };
 
